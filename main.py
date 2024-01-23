@@ -27,7 +27,7 @@ screen.onkeypress(player.go_right, "d")
 # game loop
 game_is_on = True
 while game_is_on:
-    time.sleep(0.01)
+    # time.sleep(0.01)
     screen.update()
     ball.move()
 
@@ -39,8 +39,11 @@ while game_is_on:
     # detect collision with the bottom wall
     if ball.ycor() < -350:
         scoreboard.score += 1
-        scoreboard.update_scoreboard
-        ball.reset_position()
+        if scoreboard.score == 3:
+            game_is_on = False
+        else:
+            scoreboard.update_scoreboard()
+            ball.reset_position()
 
 
     # detect collision with the side walls
@@ -50,16 +53,18 @@ while game_is_on:
     # detect collision with the wall
     for i in wall.list:
         if ball.distance(i) < 30:                  
-            print("Colisão com parede!")
             i.hideturtle()
             ball.bounce_y()
-            i.clear()
+            # i.clear()
             wall.list.remove(i)
 
 
     #Detect collision with player
     if ball.distance(player) < 40:
         ball.bounce_y()    
+    
+    if(len(wall.list) == 0): game_is_on = False
+
 
 
 # screen exit on click
