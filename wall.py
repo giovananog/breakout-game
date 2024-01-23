@@ -32,6 +32,7 @@ class Wall():
         self.last_xpos = block.xcor() 
         self.last_xshape = randint(2, 4)
         self.list.append(block)
+        return block
 
 
 
