@@ -2,17 +2,20 @@ from turtle import Turtle
 
 class Player(Turtle):
 
-    def __init__(self, x, y):
-        self.player = Turtle("square")
-        self.player.color("white")
-        self.player.turtlesize(1, 5)
-        self.player.penup()
-        self.player.goto(x, y)
+    def __init__(self, position):
+        super().__init__()
+        self.shape("square")
+        self.color("white")
+        self.shapesize(1, 5)
+        self.penup()
+        self.goto(position)
     
     def go_right(self):
-        new_x = self.xcor() + 20
-        self.goto(new_x, self.ycor())
+        if self.xcor() < 330:
+            new_x = self.xcor() + 20
+            self.goto(new_x, self.ycor())
     
     def go_left(self):
-        new_x = self.xcor() - 20
-        self.goto(new_x, self.ycor())
+        if self.xcor() > -330:
+            new_x = self.xcor() - 20
+            self.goto(new_x, self.ycor())
